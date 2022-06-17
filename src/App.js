@@ -2,6 +2,7 @@ import Harvest_Page from "./pages/harvestpage";
 import Header from "./components/header";
 import "./App.css";
 import Footer from "./components/footer";
+import HarvestPage from "./pages/harvestpage";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
               <header className="headerContainer">
                   <Header />
               </header>
-              <Harvest_Page />
+              <HarvestPage />
 
               <footer className="footerContainer">
                   <Footer />
