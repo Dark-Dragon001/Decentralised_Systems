@@ -1,4 +1,3 @@
-import Harvest_Page from "./pages/harvestpage";
 import Header from "./components/header";
 import "./App.css";
 import Footer from "./components/footer";
