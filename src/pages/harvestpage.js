@@ -1,8 +1,8 @@
-import "./harvest_page.css";
+import "./harvestpage.css";
 import React, {useState} from "react";
 
-function Harvest_Page()
-{
+const HarvestPage = () => {
+
     const [values, setValues] = useState(
         { goods: "",
                     goodSize: "",
@@ -36,13 +36,13 @@ function Harvest_Page()
     return  (
         <>
             <div className="havestPage_Cont">
-                <h1> Harvest Stage</h1>
                 <form className= "harvestForm" onSubmit={handleSubmit}>
                     {submit && valid ?
                             <div className="submitNotification"> The goods have been moved to processing.</div>
                             :
                             null
                     }
+                    <h1 className="formTitle"> Harvesting Stage</h1>
                     <label className= "goodsLabel"> Please enter the type of goods.</label>
                     <input className= "goods"
                            onChange={handleGoodsInputChange}
@@ -89,4 +89,4 @@ function Harvest_Page()
     );
 }
 
-export default Harvest_Page;
+export default HarvestPage;

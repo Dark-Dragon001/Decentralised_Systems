@@ -3,3 +3,11 @@
     background-color: rgb(31 41 55);
     color: white;
 }
+
+.footerContainer
+{
+    float: bottom;
+    margin: auto;
+    padding-top: 8%;
+    display: block;
+}

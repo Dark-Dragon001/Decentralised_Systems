@@ -1,15 +1,20 @@
-import Harvest_Page from "./pages/harvest_page";
+import Harvest_Page from "./pages/harvestpage";
 import Header from "./components/header";
 import "./App.css";
+import Footer from "./components/footer";
 
 function App() {
   return (
       <>
           <div className="App">
-              <header className="headerCntainer">
+              <header className="headerContainer">
                   <Header />
               </header>
               <Harvest_Page />
+
+              <footer className="footerContainer">
+                  <Footer />
+              </footer>
 
           </div>
 

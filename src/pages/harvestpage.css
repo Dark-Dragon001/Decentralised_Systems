@@ -17,6 +17,16 @@
     border-style: solid;
 }
 
+.formTitle
+{
+
+    margin: auto;
+    padding-bottom: 2%;
+    display: flex;
+    position: center;
+    flex: auto;
+}
+
 .goods,
 .goodsSize,
 .goodQuality
@@ -41,7 +51,6 @@
 {
     font-size: 18px;
     margin-left: 21% ;
-    indent-edge-reset: content-edge;
     padding-top: 10px;
     display: flex;
     position: initial;

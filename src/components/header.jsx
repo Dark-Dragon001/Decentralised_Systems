@@ -12,7 +12,7 @@ function Header ()
                 </span>
 
             </div>
-            <div className="hrContainer">
+            <div className="headerHrContainer">
                 <hr/>
             </div>
 
