@@ -1,0 +1,38 @@
+.leftBar
+{
+    flex: 4;
+    display: flex;
+    margin-left: 5.5%;
+    height: 15%;
+    padding-left: 2%;
+
+}
+.headerTitle
+{
+
+    margin: auto;
+    font-size:20px;
+
+
+}
+
+.headerPicture
+{
+    width: 70PX;
+    height: 70PX;
+    background: url("certificate1.png") no-repeat content-box;
+    position: relative;
+    flex: auto;
+    margin: 1%;
+    display: block;
+}
+
+.hrContainer
+{
+    color: white;
+    width: 85%;
+    alignment: center;
+    margin: auto;
+
+
+}

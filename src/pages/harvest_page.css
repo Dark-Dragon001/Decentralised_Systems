@@ -1,0 +1,71 @@
+.havestPage_Cont
+{
+    margin: auto;
+    padding-top: 2%;
+}
+.harvestForm
+{
+    flex: 4;
+    display: grid;
+    position: center;
+    padding: 2%;
+    margin: auto;
+    width: 40%;
+    flex-direction: column;
+    border-radius: 25px;
+    border-color: white;
+    border-style: solid;
+}
+
+.goods,
+.goodsSize,
+.goodQuality
+{
+    color: black;
+    background-color: white;
+    outline: none;
+    border-style: none;
+    font-size: 18px;
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    position: center;
+    justify-content: left;
+    flex: auto;
+    width: 55%;
+}
+
+.goodsLabel,
+.goodsSizeLabel,
+.goodQualityLabel
+{
+    font-size: 18px;
+    margin-left: 21% ;
+    indent-edge-reset: content-edge;
+    padding-top: 10px;
+    display: flex;
+    position: initial;
+    justify-content: left;
+    flex: auto;
+}
+
+
+.submitButton
+{
+    color: white;
+    background-color: #4e9af1;
+    margin: 15px auto;
+    border-style: none;
+    border-radius: 20px;
+    width: 50%;
+    height: 80%;
+    font-size: 25px;
+    flex: auto;
+    text-align:center;
+}
+
+.submitButton:hover
+{
+    color: black;
+    background-color:#9a4ef1;
+}
