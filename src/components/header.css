@@ -1,9 +1,10 @@
 .leftBar
 {
     flex: 4;
-    display: flex;
+    display: inline-flex;
     margin-left: 5.5%;
     height: 15%;
+    width: 60%;
     padding-left: 2%;
 
 }
@@ -23,8 +24,17 @@
     background: url("certificate1.png") no-repeat content-box;
     position: relative;
     flex: auto;
-    margin: 1%;
+    margin:auto;
     display: block;
+}
+
+.rightBar
+{
+    flex: 4;
+    display: inline-flex;
+    width: 25%;
+    margin: auto;
+
 }
 
 .headerHrContainer
@@ -33,6 +43,15 @@
     width: 85%;
     alignment: center;
     margin: auto;
+}
 
+.rightBar,
+.leftBar
+{
+    justify-content: space-evenly;
+}
 
+.headerContainer
+{
+    padding-bottom: 1%;
 }

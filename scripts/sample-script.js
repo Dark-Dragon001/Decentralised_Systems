@@ -17,9 +17,14 @@ async function main() {
   const Greeter = await hre.ethers.getContractFactory("Greeter");
   const greeter = await Greeter.deploy("Hello, Hardhat!");
 
+    const harvestContract = await hre.ethers.getContractFactory("harvestContract");
+    const harvest = await harvestContract.deploy();
+
   await greeter.deployed();
+  await harvest.deployed();
 
   console.log("Greeter deployed to:", greeter.address);
+  console.log("Harvest Contract deployed to:", harvest.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
