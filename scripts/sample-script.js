@@ -1,30 +1,26 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// When running the script with `npx hardhat run <script>` you'll find the Hardhat
-// Runtime Environment's members available in the global scope.
+
 const hre = require("hardhat");
 
 async function main() {
-  // Hardhat always runs the compile task when running scripts with its command
-  // line interface.
-  //
-  // If this script is run directly using `node` you may want to call compile
-  // manually to make sure everything is compiled
-  // await hre.run('compile');
 
-  // We get the contract to deploy
-  const Greeter = await hre.ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
 
-    const harvestContract = await hre.ethers.getContractFactory("harvestContract");
-    const harvest = await harvestContract.deploy();
 
-  await greeter.deployed();
-  await harvest.deployed();
+  //const greeter = await Greeter.deploy("Hello, Hardhat!");
+    // Harvesting Contract gets deployed.
+  const harvestContract = await hre.ethers.getContractFactory("harvestContract");
+  const harvestCont = await harvestContract.deploy();
 
-  console.log("Greeter deployed to:", greeter.address);
-  console.log("Harvest Contract deployed to:", harvest.address);
+    // Processing Contract gets deployed.
+  const processContract = await hre.ethers.getContractFactory("processContract");
+  const processCont = await processContract.deploy();
+
+    // Prints the address of Harvesting Contract.
+  await harvestCont.deployed();
+  console.log("Harvest Contract deployed in this address:", harvestCont.address);
+
+    // Prints the address of Processing Contract.
+  await harvestCont.deployed();
+  console.log("Processing Contract deployed in this address:", processCont.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

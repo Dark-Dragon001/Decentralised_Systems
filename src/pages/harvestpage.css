@@ -78,3 +78,26 @@
     color: black;
     background-color:#9a4ef1;
 }
+
+
+/* Footer Section style  */
+
+.paragraphs
+{
+    margin: auto;
+}
+
+.footerHrContainer
+{
+    color: white;
+    alignment: center;
+    margin: auto;
+}
+
+.footerContainerApp
+{
+    float: bottom;
+    margin: auto;
+    padding-top: 10%;
+    display: block;
+}

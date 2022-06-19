@@ -10,11 +10,10 @@ function App() {
               <header className="headerContainer">
                   <Header />
               </header>
+
               <HarvestPage />
 
-              <footer className="footerContainer">
-                  <Footer />
-              </footer>
+
 
           </div>
 

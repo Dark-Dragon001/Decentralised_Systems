@@ -1,6 +1,6 @@
 import "./header.css";
 import React, {useEffect, useState} from "react";
-import {ethers} from "ethers";
+import {ethers} from "ethers";;
 
 function Header ()
 {
@@ -9,23 +9,17 @@ function Header ()
 
     // Metamask connection types.
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
+    //const signer = provider.getSigner();
 
 
     useEffect(() => {
-        // Ask to connect to metamask.
-        const connectToWallet = async () => {
-            await provider.send("eth_requestAccounts", []);
-        }
+
         const getBalance = async () => {
             // Views account balance from an address.
-            const balance = await provider.getBalance("0x2BB20F4E26d02ddFa7DD29Be11075897cd448017")
+            const balance = await provider.getBalance("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
             // Views the balance of an account in a human-readable format.
-            const balanceFormat = ethers.utils.formatEther(balance)
-            setBalance(balanceFormat);
+            setBalance(ethers.utils.formatEther(balance));
         }
-        connectToWallet()
-            .catch(console.error);
         getBalance()
             .catch(console.error)
     });
