@@ -22,12 +22,12 @@ contract harvestContract
         return (goods, goodsSize, goodsQuality);
     }
 
-    function setGoods(string memory _var1, string memory _var2, string memory _var3) public
+    function setGoods(string memory _enterGoods, string memory _enterGoodsSize, string memory _enterGoodsQuality) public
     {
         // Takes inputs from the user and sets the value of strings above.
-        storeGoods = _var1;
-        storeGoodsSize = _var2;
-        storeGoodsQuality = _var3;
+        storeGoods = _enterGoods;
+        storeGoodsSize = _enterGoodsSize;
+        storeGoodsQuality = _enterGoodsQuality;
     }
 
     function getGoods() public view returns(string memory, string memory, string memory)
@@ -36,7 +36,7 @@ contract harvestContract
         return (storeGoods, storeGoodsSize, storeGoodsQuality);
     }
 
-    function inputGood() public view returns(string memory )
+    function checkGood() public view returns(string memory )
     {
         // Check whether the new product matches the products pre-defined in the goods array.
         for (uint i = 0; i < goods.length; i++)
@@ -50,7 +50,7 @@ contract harvestContract
     }
 
 
-    function inputGoodsSize() public view returns (string memory)
+    function checkGoodsSize() public view returns (string memory)
     {
         // Checks whether the size of new product matches the product size  pre-defined in the goodsSize array.
         for (uint i = 0; i < goodsSize.length; i++)
@@ -63,7 +63,7 @@ contract harvestContract
         return "Please enter from the products defined in the array.";
     }
 
-    function inputGoodsQuality() public view returns (string memory)
+    function checkGoodsQuality() public view returns (string memory)
     {
         // Checks whether the quality of the new product matches the product quality pre-defined in the goodsQuality array.
         for (uint i = 0; i < goodsQuality.length; i++)

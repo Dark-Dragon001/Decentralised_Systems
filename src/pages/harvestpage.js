@@ -21,91 +21,119 @@ const HarvestPage = () => {
     const signer = provider.getSigner();
 
     // Contract address is defined here.
-    const contractAddress = "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e";
+    const contractAddress = "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82";
 
     // The Contract Application Binary Interface (ABI).
     const ABI = [
-        {
-            "inputs": [],
-            "name": "getGoods",
-            "outputs": [
-                {
-                    "internalType": "string[10]",
-                    "name": "",
-                    "type": "string[10]"
-                },
-                {
-                    "internalType": "string[3]",
-                    "name": "",
-                    "type": "string[3]"
-                },
-                {
-                    "internalType": "string[4]",
-                    "name": "",
-                    "type": "string[4]"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_goods",
-                    "type": "string"
-                }
-            ],
-            "name": "inputGood",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_newGoodsQuality",
-                    "type": "string"
-                }
-            ],
-            "name": "inputGoodsQuality",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_newGoodsSize",
-                    "type": "string"
-                }
-            ],
-            "name": "inputGoodsSize",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        }
-    ];
+            {
+                "inputs": [],
+                "name": "checkGood",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "checkGoodsQuality",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "checkGoodsSize",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "getContractConditions",
+                "outputs": [
+                    {
+                        "internalType": "string[10]",
+                        "name": "",
+                        "type": "string[10]"
+                    },
+                    {
+                        "internalType": "string[3]",
+                        "name": "",
+                        "type": "string[3]"
+                    },
+                    {
+                        "internalType": "string[4]",
+                        "name": "",
+                        "type": "string[4]"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "getGoods",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "_enterGoods",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_enterGoodsSize",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_enterGoodsQuality",
+                        "type": "string"
+                    }
+                ],
+                "name": "setGoods",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            }
+        ];
 
     // The Contract object
     const smartContract = new ethers.Contract(contractAddress, ABI, signer);
@@ -119,10 +147,11 @@ const HarvestPage = () => {
     const submitHandler = async (e) => {
             // Handles the change while the form is submitted.
         e.preventDefault();
-        const productUpdate =  await smartContract.inputGood(productsValue);
-        //await productUpdate.wait();
+        const productUpdate =  await smartContract.setGoods(productsValue, "", "");
+        await productUpdate.wait();
         setProducts(productsValue);
-        //setProductsValue("");
+        setProductsValue("");
+        console.log(productsValue);
         console.log(productsValue);
 
     }
@@ -163,8 +192,9 @@ const HarvestPage = () => {
         }
 
         const inputProducts = async () => {
-            const smartConProd = await smartContract.inputGood(productsValue);
+            const smartConProd = await smartContract.setGoods(productsValue, "", "");
             setProducts(smartConProd);
+            console.log(products);
 
         }
         connectToWallet()
@@ -182,7 +212,7 @@ const HarvestPage = () => {
                 <form className= "harvestForm" onSubmit={submitHandler}>
 
                     <h1 className="formTitle"> Harvesting Stage</h1>
-                    <label className= "goodsLabel"> Please enter the type of goods. {products}</label>
+                    <label className= "goodsLabel"> Please enter the type of goods. {}</label>
                     <input className= "goods"
                            onChange={handleGoodsChange}
                            value={productsValue}
