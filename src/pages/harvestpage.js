@@ -1,5 +1,5 @@
 import "./harvestpage.css";
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ethers} from "ethers";
 
 
@@ -7,12 +7,12 @@ import {ethers} from "ethers";
 function HarvestPage() {
 
 
-    // Frontend user data getter and setter.
+        // Frontend user data getter and setter.
     const [products, setProducts] = useState("");
     const [productsSize, setProductsSize] = useState("");
     const [productsQuality, setProductsQuality] = useState("");
 
-    // Contract data getter  and setter.
+        // Contract data getter  and setter.
     const [contractProducts, setContractProducts] = useState("");
     const [contractProductSize, setContractProductSize] = useState("");
     const [contractProductsQuality, setContractProductsQuality] = useState("");
@@ -157,12 +157,12 @@ function HarvestPage() {
     }
 
     const handleGoodsSizeChange = (e) => {
-        // Handles the change in the GoodsSize form.
+            // Handles the change in the GoodsSize form.
         setProductsSize(e.target.value);
     }
 
     const handleGoodsQualityChange = (e) => {
-        // Handles the change in the GoodsQuality form.
+            // Handles the change in the GoodsQuality form.
         setProductsQuality(e.target.value);
     }
 
@@ -192,6 +192,13 @@ function HarvestPage() {
             setProductsQuality("");
             await transaction.wait()
             fetchGoods()
+            if (contractProducts !== "Product accepted!"
+                && contractProductSize !== "Product accepted!"
+                && contractProductsQuality !== "Product accepted!")
+            {
+                return setGoods()
+            }
+            console.log("Sent for processing");
 
 
         }
@@ -212,6 +219,9 @@ function HarvestPage() {
                 const checkGoodsSizeCont = await contract.checkGoodsSize()
                 const checkGoodsQualityCont = await contract.checkGoodsQuality()
                 console.log('data: ', data)
+                setContractProducts(checkGoodsCont);
+                setContractProductSize(checkGoodsSizeCont);
+                setContractProductsQuality(checkGoodsQualityCont);
                 console.log('Contract Goods: ', checkGoodsCont)
                 console.log('Contract Goods Size: ', checkGoodsSizeCont)
                 console.log('Contract Goods Quality: ', checkGoodsQualityCont)
@@ -220,7 +230,6 @@ function HarvestPage() {
             }
         }
     }
-
 
 
     return (
