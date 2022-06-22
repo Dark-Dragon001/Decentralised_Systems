@@ -17,6 +17,12 @@ function HarvestPage() {
     const [contractProductSize, setContractProductSize] = useState("");
     const [contractProductsQuality, setContractProductsQuality] = useState("");
 
+        // Acceptable products and qualities by smart-contract.
+    const goodsList = "Apple, Orange, Banana, Lemon, Tomato, Potato, Cucumber, Carrot, Onion, Mushroom";
+    const goodsSizeList = "Medium, Large, Extra-large";
+    const goodsQualityList = "Raw, Half-ripen, Ripen, Full-ripen";
+
+
 
         //const [harvestContractABI, setHarvestContractABI] = useState("");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -256,13 +262,13 @@ function HarvestPage() {
                         </div>
                         <div className="paragraphsContainer">
                             <p className="productsParagraph">
-                                Goods requested by the contractor are: {products}
+                                Goods requested by the contractor are: {goodsList}
                             </p>
                             <p className="productsParagraph">
-                                Goods size requested by the contractor are: {productsSize}
+                                Goods size requested by the contractor are: {goodsSizeList}
                             </p>
                             <p className="productsParagraph">
-                                Goods quality requested by the contractor are: {productsQuality}
+                                Goods quality requested by the contractor are: {goodsQualityList}
                             </p>
                         </div>
                     </footer>
