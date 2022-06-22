@@ -29,18 +29,12 @@ function ProcessPage() {
     const signer = provider.getSigner();
 
         // Contract address is defined here.
-    const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+    const contractAddress = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
 
         // The Contract Application Binary Interface (ABI).
     const ABI = [
         {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_chemicalCompound",
-                    "type": "string"
-                }
-            ],
+            "inputs": [],
             "name": "checkChemicalUsage",
             "outputs": [
                 {
@@ -49,17 +43,11 @@ function ProcessPage() {
                     "type": "string"
                 }
             ],
-            "stateMutability": "pure",
+            "stateMutability": "view",
             "type": "function"
         },
         {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_packagingMethods",
-                    "type": "string"
-                }
-            ],
+            "inputs": [],
             "name": "checkPackagingMethod",
             "outputs": [
                 {
@@ -72,18 +60,7 @@ function ProcessPage() {
             "type": "function"
         },
         {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_washStatus",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "x",
-                    "type": "uint256"
-                }
-            ],
+            "inputs": [],
             "name": "checkWashStatus",
             "outputs": [
                 {
@@ -92,17 +69,40 @@ function ProcessPage() {
                     "type": "string"
                 },
                 {
-                    "internalType": "uint256",
+                    "internalType": "uint8",
                     "name": "",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
+                    "type": "uint8"
                 }
             ],
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_pkgMethod",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_chemicalComp",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_washingStatus",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "_washTemp",
+                    "type": "uint8"
+                }
+            ],
+            "name": "setProcess",
+            "outputs": [],
+            "stateMutability": "nonpayable",
             "type": "function"
         },
         {
@@ -110,11 +110,6 @@ function ProcessPage() {
             "name": "viewProcessContract",
             "outputs": [
                 {
-                    "internalType": "string[5]",
-                    "name": "",
-                    "type": "string[5]"
-                },
-                {
                     "internalType": "string",
                     "name": "",
                     "type": "string"
@@ -125,42 +120,21 @@ function ProcessPage() {
                     "type": "string"
                 },
                 {
-                    "internalType": "uint256",
+                    "internalType": "string",
                     "name": "",
-                    "type": "uint256"
+                    "type": "string"
                 },
                 {
-                    "internalType": "uint256",
+                    "internalType": "uint8",
                     "name": "",
-                    "type": "uint256"
+                    "type": "uint8"
                 }
             ],
             "stateMutability": "view",
             "type": "function"
         }
-    ];
+            ];
 
-        // The Contract object
-    //const smartContract = new ethers.Contract(contractAddress, ABI, signer);
-
-
-/*
-    const handleGoodsChange = (e) => {
-            // Handles the change in the Goods form.
-        setProducts(e.target.value);
-    }
-
-    const handleGoodsSizeChange = (e) => {
-            // Handles the change in the GoodsSize form.
-        setProductsSize(e.target.value);
-    }
-
-    const handleGoodsQualityChange = (e) => {
-            // Handles the change in the GoodsQuality form.
-        setProductsQuality(e.target.value);
-    }
-
-    */
 
     async function requestAccount()
     {
@@ -171,7 +145,7 @@ function ProcessPage() {
 
     async function setProcess(e)
     {
-            // Sets the data of Goods, Goods Size, Goods Quality for smart contract.
+            // Sets the data for packaging methods, chemical compound usage, wash status and water temperature used in washing products for smart contract.
         e.preventDefault();
         if (!packagingMethod && !chemicalUsage && !washStatus && ! washTemp) return
         if (typeof window.ethereum !== 'undefined') {
@@ -180,25 +154,15 @@ function ProcessPage() {
             console.log({ provider })
             const signer = provider.getSigner()
             const contract = new ethers.Contract(contractAddress, ABI, signer)
-            const transaction = await contract.setGoods(packagingMethod, chemicalUsage, washStatus, washTemp)
-            console.log({packagingMethod, chemicalUsage, washStatus, washTemp}+ " Was done.");
-            //setPackagingMethod(transaction);
-            //setPackagingMethod("");
-            //setChemicalUsage("");
-            //setWashStatus("");
-            //setWashTemp("");
+            const transaction = await contract.setProcess(packagingMethod, chemicalUsage, washStatus, washTemp)
+            console.log("Transaction done.");
+            setPackagingMethod(transaction);
+            setPackagingMethod("");
+            setChemicalUsage("");
+            setWashStatus("");
+            setWashTemp("");
             await transaction.wait()
             fetchProcesed()
-            if (packagingMethod !== "Product accepted!"
-                && chemicalUsage !== "Product accepted!"
-                && washStatus !== "Product accepted!"
-                && washTemp !== "Product accepted!")
-            {
-                return setProcess()
-            }
-            console.log("Sent for processing");
-
-
         }
     }
 
@@ -212,14 +176,14 @@ function ProcessPage() {
             const signer = provider.getSigner()
             const contract = new ethers.Contract(contractAddress, ABI, signer)
             try {
-                const data = await contract.viewProcessContract()
-                //const checkGoodsCont = await contract.checkGood()
-                //const checkGoodsSizeCont = await contract.checkGoodsSize()
+                const packagingData = await contract.checkPackagingMethod()
+                const chemicalUsageData = await contract.checkChemicalUsage()
+                const washData = await contract.checkWashStatus()
                // const checkGoodsQualityCont = await contract.checkGoodsQuality()
-                console.log('data: ', data)
-                //setContPackagingMethod(checkGoodsCont);
-                //setContChemicalUsage(checkGoodsSizeCont);
-                //setContWashStatus(checkGoodsQualityCont);
+                console.log('data: ', packagingData, chemicalUsageData, washData)
+                setContPackagingMethod(packagingData);
+                setContChemicalUsage(chemicalUsageData);
+                setContWashStatus(washData);
                 //setWashTemp()
                 //console.log('Contract Goods: ', checkGoodsCont)
                 //console.log('Contract Goods Size: ', checkGoodsSizeCont)
@@ -238,6 +202,7 @@ function ProcessPage() {
 
                         <h1 className="processFormTitle"> Harvesting Stage</h1>
                         <label className="packagingLabel"> Please enter the packaging method:</label>
+                        <label className="contPackagingLabel">{contPackagingMethod}</label>
                         <input className="packagingMethods"
                                onChange={(e) => {setPackagingMethod(e.target.value)}}
                                value={packagingMethod}
@@ -245,6 +210,7 @@ function ProcessPage() {
                         />
 
                         <label className= "chemicalUsageLabel"> Please enter chemical usage status:</label>
+                        <label className="contChemicalLabel">{contChemicalUsage}</label>
                         <input className= "chemicalUsageStatus"
                                onChange={(e) => {setChemicalUsage(e.target.value)}}
                                value={chemicalUsage}
@@ -252,6 +218,7 @@ function ProcessPage() {
                         />
 
                         <label className= "washStatusLabel"> Please enter wash status:</label>
+                        <label className="contWashLabel">{contWashStatus}</label>
                         <input className= "washStatus"
                                onChange={(e) => {setWashStatus(e.target.value)}}
                                value={washStatus}
@@ -268,11 +235,7 @@ function ProcessPage() {
                         <input className="processSubmitButton"
                                type="submit"
                                value="Prepare fo shipment"/>
-                        <button onClick={fetchProcesed}>Fetch data</button>
                     </form>
-
-                    <h2>This is {packagingMethod + chemicalUsage + washStatus + washTemp}</h2>
-
 
                     <footer className="footerContainerApp">
                         <div className="footerHrContainer">

@@ -14,8 +14,8 @@ contract processContract
     {
         // A struct data type to take washed products with the temperature of the water they were washed in.
         string washingStatus;
-        uint maxTemp;
-        uint minTemp;
+        uint8 maxTemp;
+        uint8 minTemp;
     }
 
     // Constructor || Setting struct values as string, uint, uint.
@@ -28,18 +28,18 @@ contract processContract
     string packMethod;
     string washStatusGet;
     string chemicStatus;
-    uint washTemperature;
+    uint8 washTemperature;
 
 
 
-    function viewProcessContract() public view returns(string memory, string memory, string memory, uint)
+    function viewProcessContract() public view returns(string memory, string memory, string memory, uint8)
     {
         // View the conditions under the products are going to be processed.
         return (packMethod, chemicStatus, washStatusGet, washTemperature);
     }
 
 
-    function setProcess(string memory _pkgMethod, string memory _chemicalComp, string memory _washingStatus, uint _washTemp) public
+    function setProcess(string memory _pkgMethod, string memory _chemicalComp, string memory _washingStatus, uint8 _washTemp) public
     {
         // Gets data from the user and sets it to the vriables defined above.
         packMethod = _pkgMethod;
@@ -49,7 +49,7 @@ contract processContract
     }
 
 
-    function checkWashStatus() public view returns(string memory, uint)
+    function checkWashStatus() public view returns(string memory, uint8)
     {
         // Checks if the products have been washed or no.
         if(keccak256(abi.encodePacked(washStatusGet)) == keccak256(abi.encodePacked(wshStrct.washingStatus)) &&

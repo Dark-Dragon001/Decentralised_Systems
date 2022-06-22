@@ -46,8 +46,11 @@
 }
 
 .goodsLabel,
+.conGoodsLabel,
 .goodsSizeLabel,
-.goodQualityLabel
+.contGoodsSizeLabel,
+.goodQualityLabel,
+.contGoodsQualityLabel
 {
     font-size: 18px;
     margin-left: 21% ;
@@ -56,6 +59,14 @@
     position: initial;
     justify-content: left;
     flex: auto;
+}
+
+
+.conGoodsLabel,
+.contGoodsSizeLabel,
+.contGoodsQualityLabel
+{
+    color: #9a4ef1;
 }
 
 

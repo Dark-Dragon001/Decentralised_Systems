@@ -49,7 +49,10 @@
 .packagingLabel,
 .chemicalUsageLabel,
 .washStatusLabel,
-.washTemperatureLabel
+.washTemperatureLabel,
+.contPackagingLabel,
+.contChemicalLabel,
+.contWashLabel
 {
     font-size: 18px;
     margin-left: 21% ;
@@ -58,6 +61,13 @@
     position: initial;
     justify-content: left;
     flex: auto;
+}
+
+.contPackagingLabel,
+.contChemicalLabel,
+.contWashLabel
+{
+    color: #9a4ef1;
 }
 
 

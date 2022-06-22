@@ -1,6 +1,8 @@
 import "./harvestpage.css";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
+import { BrowserRouter as Router, Route, Routes, useHistory } from "react-router-dom";
 import {ethers} from "ethers";
+import ProcessPage from "./processpage";
 
 
 
@@ -31,7 +33,7 @@ function HarvestPage() {
 
 
         // Contract address is defined here.
-    const contractAddress = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
+    const contractAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
 
         // The Contract Application Binary Interface (ABI).
     const ABI = [
@@ -173,6 +175,7 @@ function HarvestPage() {
 
     }
 
+
     async function setGoods(e)
     {
             // Sets the data of Goods, Goods Size, Goods Quality for smart contract.
@@ -181,24 +184,16 @@ function HarvestPage() {
         if (typeof window.ethereum !== 'undefined') {
             await requestAccount()
             const provider = new ethers.providers.Web3Provider(window.ethereum);
-            console.log({ provider })
             const signer = provider.getSigner()
             const contract = new ethers.Contract(contractAddress, ABI, signer)
             const transaction = await contract.setGoods(products, productsSize, productsQuality)
-            console.log({products}+ " Was done.");
             setProducts(transaction);
             setProducts("");
             setProductsSize("");
             setProductsQuality("");
             await transaction.wait()
             fetchGoods()
-            if (contractProducts !== "Product accepted!"
-                && contractProductSize !== "Product accepted!"
-                && contractProductsQuality !== "Product accepted!")
-            {
-                return setGoods()
-            }
-            console.log("Sent for processing");
+
 
 
         }
@@ -214,11 +209,9 @@ function HarvestPage() {
             const signer = provider.getSigner()
             const contract = new ethers.Contract(contractAddress, ABI, signer)
             try {
-                const data = await contract.getGoods()
                 const checkGoodsCont = await contract.checkGood()
                 const checkGoodsSizeCont = await contract.checkGoodsSize()
                 const checkGoodsQualityCont = await contract.checkGoodsQuality()
-                console.log('data: ', data)
                 setContractProducts(checkGoodsCont);
                 setContractProductSize(checkGoodsSizeCont);
                 setContractProductsQuality(checkGoodsQualityCont);
@@ -239,13 +232,15 @@ function HarvestPage() {
 
                         <h1 className="formTitle"> Harvesting Stage</h1>
                         <label className="goodsLabel"> Please enter the type of goods.</label>
+                        <label className="conGoodsLabel">{contractProducts} </label>
                         <input className="goods"
                                onChange={handleGoodsChange}
                                value={products}
-                               placeholder="Produt"
+                               placeholder="Product"
                         />
 
                         <label className= "goodsSizeLabel"> Please enter the size of goods.</label>
+                        <label className="contGoodsSizeLabel">{contractProductSize}</label>
                         <input className= "goodsSize"
                                onChange={handleGoodsSizeChange}
                                value={productsSize}
@@ -253,6 +248,7 @@ function HarvestPage() {
                         />
 
                         <label className= "goodQualityLabel"> Please enter goods quality.</label>
+                        <label className="contGoodsQualityLabel">{contractProductsQuality}</label>
                         <input className= "goodQuality"
                                onChange={handleGoodsQualityChange}
                                value={productsQuality}
@@ -261,9 +257,8 @@ function HarvestPage() {
 
                         <input className="submitButton"
                                type="submit"
-                               value="Send to Process"/>
+                               value="Check Products"/>
                     </form>
-
 
                     <footer className="footerContainerApp">
                         <div className="footerHrContainer">
