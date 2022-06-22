@@ -13,8 +13,6 @@ function App() {
 
               <HarvestPage />
 
-
-
           </div>
 
       </>
@@ -23,4 +21,3 @@ function App() {
 }
 
 export default App;
-//0x02B8E8b07b8c77054E70D9A8b784D1D856868b94 contract address.

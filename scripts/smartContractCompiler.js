@@ -21,6 +21,7 @@ async function main() {
     // Prints the address of Processing Contract.
   await harvestCont.deployed();
   console.log("Processing Contract deployed in this address:", processCont.address);
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
