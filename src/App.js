@@ -2,6 +2,7 @@ import Header from "./components/header";
 import "./App.css";
 import Footer from "./components/footer";
 import HarvestPage from "./pages/harvestpage";
+import ProcessPage from "./pages/processpage";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
                   <Header />
               </header>
 
-              <HarvestPage />
+              <ProcessPage />
 
           </div>
 

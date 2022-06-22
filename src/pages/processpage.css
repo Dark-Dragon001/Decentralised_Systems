@@ -1,0 +1,105 @@
+.processPageCont
+{
+    margin: auto;
+    padding-top: 1%;
+}
+.processForm
+{
+    flex: 4;
+    display: grid;
+    position: center;
+    padding: 2%;
+    margin: auto;
+    width: 40%;
+    flex-direction: column;
+    border-radius: 25px;
+    border-color: white;
+    border-style: solid;
+}
+
+.processFormTitle
+{
+
+    margin: auto;
+    padding-bottom: 2%;
+    display: flex;
+    position: center;
+    flex: auto;
+}
+
+.packagingMethods,
+.chemicalUsageStatus,
+.washStatus,
+.washTemperature
+{
+    color: black;
+    background-color: white;
+    outline: none;
+    border-style: none;
+    font-size: 18px;
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    position: center;
+    justify-content: left;
+    flex: auto;
+    width: 55%;
+}
+
+.packagingLabel,
+.chemicalUsageLabel,
+.washStatusLabel,
+.washTemperatureLabel
+{
+    font-size: 18px;
+    margin-left: 21% ;
+    padding-top: 10px;
+    display: flex;
+    position: initial;
+    justify-content: left;
+    flex: auto;
+}
+
+
+.processSubmitButton
+{
+    color: white;
+    background-color: #4e9af1;
+    margin: 15px auto;
+    border-style: none;
+    border-radius: 20px;
+    width: 50%;
+    height: 80%;
+    font-size: 25px;
+    flex: auto;
+    text-align:center;
+}
+
+.processSubmitButton:hover
+{
+    color: black;
+    background-color:#9a4ef1;
+}
+
+
+/* Footer Section style  */
+
+.paragraphs
+{
+    margin: auto;
+}
+
+.footerHrContainer
+{
+    color: white;
+    alignment: center;
+    margin: auto;
+}
+
+.footerContainerApp
+{
+    float: bottom;
+    margin: auto;
+    padding-top: 5%;
+    display: block;
+}

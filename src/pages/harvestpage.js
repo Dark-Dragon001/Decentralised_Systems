@@ -177,7 +177,7 @@ function HarvestPage() {
     {
             // Sets the data of Goods, Goods Size, Goods Quality for smart contract.
         e.preventDefault();
-        if (!products && !productsSize && productsQuality) return
+        if (!products && !productsSize && !productsQuality) return
         if (typeof window.ethereum !== 'undefined') {
             await requestAccount()
             const provider = new ethers.providers.Web3Provider(window.ethereum);
