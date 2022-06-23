@@ -1,8 +1,8 @@
-import Header from "./components/header";
 import "./App.css";
-import Footer from "./components/footer";
+import Header from "./components/header";
 import HarvestPage from "./pages/harvestpage";
 import ProcessPage from "./pages/processpage";
+import ShipmentPage from "./pages/shipmentpage";
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
 
               <HarvestPage />
               <ProcessPage />
+              <ShipmentPage />
 
           </div>
 

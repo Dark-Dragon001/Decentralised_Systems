@@ -179,15 +179,10 @@ function ProcessPage() {
                 const packagingData = await contract.checkPackagingMethod()
                 const chemicalUsageData = await contract.checkChemicalUsage()
                 const washData = await contract.checkWashStatus()
-               // const checkGoodsQualityCont = await contract.checkGoodsQuality()
                 console.log('data: ', packagingData, chemicalUsageData, washData)
                 setContPackagingMethod(packagingData);
                 setContChemicalUsage(chemicalUsageData);
                 setContWashStatus(washData);
-                //setWashTemp()
-                //console.log('Contract Goods: ', checkGoodsCont)
-                //console.log('Contract Goods Size: ', checkGoodsSizeCont)
-                //console.log('Contract Goods Quality: ', checkGoodsQualityCont)
             } catch (err) {
                 console.log("Error: ", err)
             }
@@ -200,7 +195,7 @@ function ProcessPage() {
                 <div className="processPageCont">
                     <form className="processForm" onSubmit={setProcess}>
 
-                        <h1 className="processFormTitle"> Harvesting Stage</h1>
+                        <h1 className="processFormTitle"> Processing Stage</h1>
                         <label className="packagingLabel"> Please enter the packaging method:</label>
                         <label className="contPackagingLabel">{contPackagingMethod}</label>
                         <input className="packagingMethods"
@@ -234,7 +229,7 @@ function ProcessPage() {
 
                         <input className="processSubmitButton"
                                type="submit"
-                               value="Prepare fo shipment"/>
+                               value="Check Process"/>
                     </form>
 
                     <footer className="footerContainerApp">

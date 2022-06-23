@@ -227,7 +227,7 @@ function HarvestPage() {
 
     return (
             <>
-                <div className="harvestPage_Cont">
+                <div className="harvestPageCont">
                     <form className="harvestForm" onSubmit={setGoods}>
 
                         <h1 className="formTitle"> Harvesting Stage</h1>
@@ -255,7 +255,7 @@ function HarvestPage() {
                                placeholder= "Product Quality"
                         />
 
-                        <input className="submitButton"
+                        <input className="processSubmitButton"
                                type="submit"
                                value="Check Products"/>
                     </form>
