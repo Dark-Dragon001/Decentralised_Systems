@@ -8,20 +8,19 @@ function ShipmentPage() {
 
 
     // Frontend user data getter and setter.
-    const [products, setProducts] = useState("");
-    const [productsSize, setProductsSize] = useState("");
-    const [productsQuality, setProductsQuality] = useState("");
+    const [shipProducts, setShipProducts] = useState("");
+    const [productsAmount, setProductsAmount] = useState("");
+    const [temperature, setTemperature] = useState("");
+    const [shipTime, setShipTime] = useState("");
 
     // Contract data getter  and setter.
-    const [contractProducts, setContractProducts] = useState("");
-    const [contractProductSize, setContractProductSize] = useState("");
-    const [contractProductsQuality, setContractProductsQuality] = useState("");
+    const [contShipProducts, setContShipProducts] = useState("");
+    const [contProductAmount, setContProductAmount] = useState("");
+    const [contTemperature, setContTemperature] = useState("");
+    const [contShipTime, setContShipTime] = useState("");
 
     // Acceptable products and qualities by smart-contract.
     const goodsList = "Apple, Orange, Banana, Lemon, Tomato, Potato, Cucumber, Carrot, Onion, Mushroom";
-    const goodsSizeList = "Medium, Large, Extra-large";
-    const goodsQualityList = "Raw, Half-ripen, Ripen, Full-ripen";
-
 
 
     //const [harvestContractABI, setHarvestContractABI] = useState("");
@@ -31,13 +30,13 @@ function ShipmentPage() {
 
 
     // Contract address is defined here.
-    const contractAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
+    const contractAddress = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
 
     // The Contract Application Binary Interface (ABI).
     const ABI = [
         {
             "inputs": [],
-            "name": "checkGood",
+            "name": "checkLoadAmount",
             "outputs": [
                 {
                     "internalType": "string",
@@ -50,7 +49,7 @@ function ShipmentPage() {
         },
         {
             "inputs": [],
-            "name": "checkGoodsQuality",
+            "name": "checkLoadProduct",
             "outputs": [
                 {
                     "internalType": "string",
@@ -63,7 +62,7 @@ function ShipmentPage() {
         },
         {
             "inputs": [],
-            "name": "checkGoodsSize",
+            "name": "checkTemperature",
             "outputs": [
                 {
                     "internalType": "string",
@@ -76,41 +75,8 @@ function ShipmentPage() {
         },
         {
             "inputs": [],
-            "name": "getContractConditions",
+            "name": "getShipmentMaxTime",
             "outputs": [
-                {
-                    "internalType": "string[10]",
-                    "name": "",
-                    "type": "string[10]"
-                },
-                {
-                    "internalType": "string[3]",
-                    "name": "",
-                    "type": "string[3]"
-                },
-                {
-                    "internalType": "string[4]",
-                    "name": "",
-                    "type": "string[4]"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "getGoods",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                },
                 {
                     "internalType": "string",
                     "name": "",
@@ -123,22 +89,27 @@ function ShipmentPage() {
         {
             "inputs": [
                 {
-                    "internalType": "string",
-                    "name": "_enterGoods",
-                    "type": "string"
+                    "internalType": "uint8",
+                    "name": "_shipMaxTime",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "_loadAmount",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "_tempValue",
+                    "type": "uint8"
                 },
                 {
                     "internalType": "string",
-                    "name": "_enterGoodsSize",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_enterGoodsQuality",
+                    "name": "_loadProdut",
                     "type": "string"
                 }
             ],
-            "name": "setGoods",
+            "name": "setShipmentData",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -149,22 +120,6 @@ function ShipmentPage() {
     // The Contract object
     //const smartContract = new ethers.Contract(contractAddress, ABI, signer);
 
-
-
-    const handleGoodsChange = (e) => {
-        // Handles the change in the Goods form.
-        setProducts(e.target.value);
-    }
-
-    const handleGoodsSizeChange = (e) => {
-        // Handles the change in the GoodsSize form.
-        setProductsSize(e.target.value);
-    }
-
-    const handleGoodsQualityChange = (e) => {
-        // Handles the change in the GoodsQuality form.
-        setProductsQuality(e.target.value);
-    }
 
     async function requestAccount()
     {
@@ -178,17 +133,18 @@ function ShipmentPage() {
     {
         // Sets the data of Goods, Goods Size, Goods Quality for smart contract.
         e.preventDefault();
-        if (!products && !productsSize && !productsQuality) return
+        if (! shipProducts&& !productsAmount && !temperature && ! shipTime) return
         if (typeof window.ethereum !== 'undefined') {
             await requestAccount()
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner()
             const contract = new ethers.Contract(contractAddress, ABI, signer)
-            const transaction = await contract.setGoods(products, productsSize, productsQuality)
-            setProducts(transaction);
-            setProducts("");
-            setProductsSize("");
-            setProductsQuality("");
+            const transaction = await contract.setShipmentData(shipTime, productsAmount, temperature, shipProducts)
+            setShipProducts(transaction);
+            setShipProducts("");
+            setProductsAmount("");
+            setTemperature("");
+            setShipTime("");
             await transaction.wait()
             fetchGoods()
 
@@ -207,15 +163,15 @@ function ShipmentPage() {
             const signer = provider.getSigner()
             const contract = new ethers.Contract(contractAddress, ABI, signer)
             try {
-                const checkGoodsCont = await contract.checkGood()
-                const checkGoodsSizeCont = await contract.checkGoodsSize()
-                const checkGoodsQualityCont = await contract.checkGoodsQuality()
-                setContractProducts(checkGoodsCont);
-                setContractProductSize(checkGoodsSizeCont);
-                setContractProductsQuality(checkGoodsQualityCont);
-                console.log('Contract Goods: ', checkGoodsCont)
-                console.log('Contract Goods Size: ', checkGoodsSizeCont)
-                console.log('Contract Goods Quality: ', checkGoodsQualityCont)
+                const loadProduct = await contract.checkLoadProduct()
+                const loadAmount = await contract.checkLoadAmount()
+                const tempData = await contract.checkTemperature()
+                const timeDate = await contract.getShipmentMaxTime()
+                console.log('data: ', loadProduct, loadAmount, tempData, timeDate)
+                setContShipProducts(loadProduct);
+                setContProductAmount(loadAmount);
+                setContTemperature(tempData);
+                setContShipTime(timeDate);
             } catch (err) {
                 console.log("Error: ", err)
             }
@@ -229,28 +185,36 @@ function ShipmentPage() {
                 <form className="shipmentForm" onSubmit={setGoods}>
 
                     <h1 className="shipmentFormTitle"> Shipment Stage</h1>
-                    <label className="shipmentLabel"> Please enter the type of goods.</label>
-                    <label className="conShipmentLabel">{contractProducts} </label>
+                    <label className="shipmentLabel"> Please enter the type of product.</label>
+                    <label className="conShipmentLabel">{contShipProducts} </label>
                     <input className="shipmentFormOne"
-                           onChange={handleGoodsChange}
-                           value={products}
+                           onChange={(e) => {setShipProducts(e.target.value)}}
+                           value={shipProducts}
                            placeholder="Product"
                     />
 
-                    <label className= "shipmentLabel"> Please enter the size of goods.</label>
-                    <label className="conShipmentLabel">{contractProductSize}</label>
+                    <label className= "shipmentLabel"> Please enter amount of the product in Kg.</label>
+                    <label className="conShipmentLabel">{contProductAmount}</label>
                     <input className= "shipmentFormTwo"
-                           onChange={handleGoodsSizeChange}
-                           value={productsSize}
-                           placeholder= "Product Size"
+                           onChange={(e) => {setProductsAmount(e.target.value)}}
+                           value={productsAmount}
+                           placeholder= "Product Amount"
                     />
 
-                    <label className= "shipmentLabel"> Please enter goods quality.</label>
-                    <label className="conShipmentLabel">{contractProductsQuality}</label>
+                    <label className= "shipmentLabel"> Please enter shipment container temperature.</label>
+                    <label className="conShipmentLabel">{contTemperature}</label>
                     <input className= "shipmentFormThree"
-                           onChange={handleGoodsQualityChange}
-                           value={productsQuality}
-                           placeholder= "Product Quality"
+                           onChange={(e) => {setTemperature(e.target.value)}}
+                           value={temperature}
+                           placeholder= "Temperature"
+                    />
+
+                    <label className= "shipmentLabel"> Please enter shipment time.</label>
+                    <label className="conShipmentLabel">{contShipTime}</label>
+                    <input className= "shipmentFormFour"
+                           onChange={(e) => {setShipTime(e.target.value)}}
+                           value={shipTime}
+                           placeholder= "Shipment Time"
                     />
 
                     <input className="shipmentSubmitButton"
@@ -264,13 +228,16 @@ function ShipmentPage() {
                     </div>
                     <div className="paragraphsContainer">
                         <p className="productsParagraph">
-                            Goods requested by the contractor are: {goodsList}
+                            Acceptable goods for shipment: {goodsList}.
                         </p>
                         <p className="productsParagraph">
-                            Goods size requested by the contractor are: {goodsSizeList}
+                            Product amount requested: 50Kg.
                         </p>
                         <p className="productsParagraph">
-                            Goods quality requested by the contractor are: {goodsQualityList}
+                            Acceptable shipment temperature: 0C - 10C.
+                        </p>
+                        <p className="productsParagraph">
+                            Maximum shipment time: 48Hrs.
                         </p>
                     </div>
                 </footer>

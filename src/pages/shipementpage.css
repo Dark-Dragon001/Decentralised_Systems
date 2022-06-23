@@ -29,7 +29,8 @@
 
 .shipmentFormOne,
 .shipmentFormTwo,
-.shipmentFormThree
+.shipmentFormThree,
+.shipmentFormFour
 {
     color: black;
     background-color: white;
@@ -45,7 +46,8 @@
     width: 55%;
 }
 
-.shipmentLabel
+.shipmentLabel,
+.conShipmentLabel
 {
     font-size: 18px;
     margin-left: 21% ;
