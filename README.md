@@ -21,6 +21,8 @@ The first command "npx hardhat node" starts hardhat server witt 20 ethereum acco
 Now, run the second command "npx hardhat compile" to compile the smart contracts. Copy the address of each smart-contract and past it to their pages in contract address section.
 Lastly, run the third command "npx hardhat run scripts/smartContractCompiler.js " to run the compiled smart-contracts.
 
-It should be working fine now
+It should be working fine now.
+
+More description about this project can be found in the projectInfo directory including system design.
 
 Note: using separate terminals are strongly recommended. Especially, for "npm run start" and "npx hardhat node" these two needs to be running in order for the project to work.
