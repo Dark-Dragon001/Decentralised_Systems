@@ -13,8 +13,6 @@ function App() {
               </header>
 
               <HarvestPage />
-              <ProcessPage />
-              <ShipmentPage />
 
           </div>
 

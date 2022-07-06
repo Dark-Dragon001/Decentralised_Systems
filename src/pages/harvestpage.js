@@ -1,6 +1,6 @@
 import "./harvestpage.css";
 import React, {useState} from "react";
-import { BrowserRouter as Router, Route, Routes, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {ethers} from "ethers";
 import ProcessPage from "./processpage";
 
@@ -24,6 +24,22 @@ function HarvestPage() {
     const goodsSizeList = "Medium, Large, Extra-large";
     const goodsQualityList = "Raw, Half-ripen, Ripen, Full-ripen";
 
+
+        // Event handlers.
+    const handleGoodsChange = (e) => {
+        // Handles the change in the Goods form.
+        setProducts(e.target.value);
+    };
+
+    const handleGoodsSizeChange = (e) => {
+        // Handles the change in the GoodsSize form.
+        setProductsSize(e.target.value);
+    };
+
+    const handleGoodsQualityChange = (e) => {
+        // Handles the change in the GoodsQuality form.
+        setProductsQuality(e.target.value);
+    };
 
 
         //const [harvestContractABI, setHarvestContractABI] = useState("");
@@ -153,21 +169,6 @@ function HarvestPage() {
 
 
 
-    const handleGoodsChange = (e) => {
-            // Handles the change in the Goods form.
-        setProducts(e.target.value);
-    }
-
-    const handleGoodsSizeChange = (e) => {
-            // Handles the change in the GoodsSize form.
-        setProductsSize(e.target.value);
-    }
-
-    const handleGoodsQualityChange = (e) => {
-            // Handles the change in the GoodsQuality form.
-        setProductsQuality(e.target.value);
-    }
-
     async function requestAccount()
     {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -181,7 +182,8 @@ function HarvestPage() {
             // Sets the data of Goods, Goods Size, Goods Quality for smart contract.
         e.preventDefault();
         if (!products && !productsSize && !productsQuality) return
-        if (typeof window.ethereum !== 'undefined') {
+        if (typeof window.ethereum !== 'undefined')
+        {
             await requestAccount()
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner()
@@ -193,9 +195,6 @@ function HarvestPage() {
             setProductsQuality("");
             await transaction.wait()
             fetchGoods()
-
-
-
         }
     }
 

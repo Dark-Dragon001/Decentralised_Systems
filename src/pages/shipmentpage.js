@@ -185,33 +185,33 @@ function ShipmentPage() {
                 <form className="shipmentForm" onSubmit={setGoods}>
 
                     <h1 className="shipmentFormTitle"> Shipment Stage</h1>
-                    <label className="shipmentLabel"> Please enter the type of product.</label>
+                    <label className="shipmentProductLabel"> Please enter the type of product.</label>
                     <label className="conShipmentLabel">{contShipProducts} </label>
-                    <input className="shipmentFormOne"
+                    <input className="shipmentProductForm"
                            onChange={(e) => {setShipProducts(e.target.value)}}
                            value={shipProducts}
                            placeholder="Product"
                     />
 
-                    <label className= "shipmentLabel"> Please enter amount of the product in Kg.</label>
+                    <label className= "shipmentProductAmountLabel"> Please enter amount of the product in Kg.</label>
                     <label className="conShipmentLabel">{contProductAmount}</label>
-                    <input className= "shipmentFormTwo"
+                    <input className= "shipmentProductAmountForm"
                            onChange={(e) => {setProductsAmount(e.target.value)}}
                            value={productsAmount}
                            placeholder= "Product Amount"
                     />
 
-                    <label className= "shipmentLabel"> Please enter shipment container temperature.</label>
+                    <label className= "shipmentTempLabel"> Please enter shipment container temperature.</label>
                     <label className="conShipmentLabel">{contTemperature}</label>
-                    <input className= "shipmentFormThree"
+                    <input className= "shipmentTempForm"
                            onChange={(e) => {setTemperature(e.target.value)}}
                            value={temperature}
                            placeholder= "Temperature"
                     />
 
-                    <label className= "shipmentLabel"> Please enter shipment time.</label>
+                    <label className= "shipmentTimeLabel"> Please enter shipment time.</label>
                     <label className="conShipmentLabel">{contShipTime}</label>
-                    <input className= "shipmentFormFour"
+                    <input className= "shipmentTimeForm"
                            onChange={(e) => {setShipTime(e.target.value)}}
                            value={shipTime}
                            placeholder= "Shipment Time"

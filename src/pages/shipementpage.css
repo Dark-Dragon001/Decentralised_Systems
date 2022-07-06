@@ -27,10 +27,10 @@
     flex: auto;
 }
 
-.shipmentFormOne,
-.shipmentFormTwo,
-.shipmentFormThree,
-.shipmentFormFour
+.shipmentProductForm,
+.shipmentProductAmountForm,
+.shipmentTempForm,
+.shipmentTimeForm
 {
     color: black;
     background-color: white;
@@ -46,8 +46,10 @@
     width: 55%;
 }
 
-.shipmentLabel,
-.conShipmentLabel
+.shipmentProductLabel,
+.shipmentProductAmountLabel,
+.shipmentTempLabel,
+.shipmentTimeLabel
 {
     font-size: 18px;
     margin-left: 21% ;
